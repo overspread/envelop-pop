@@ -9,7 +9,7 @@
         <div class="paper">
           <div class="head-left">
             <p class="title">尊敬的凡且匠用户:</p>
-            <p class="text-indent" style="margin: 10px 0px 0px;">您好！</p>
+            <p class="text-indent">您好！</p>
             <p class="time text-indent">
               自2019年至今，凡且匠系列产品之三甲E测、凌辰扶摇等考试培训系统已经陪伴大家走过了近5年。在此期间，
               <span class="hot">平台医院总数由十几家迅速突破近五百家，平台护士人数超3万人，考试总场次接近一万场</span>
@@ -31,14 +31,17 @@
         <div class="bottom">
           <div class="logo"></div>
         </div>
-        <div class="goon goon-click" @click="showEnvelope = false" v-show="showKnow">我已知晓</div>
-        <div class="goon goon-look" v-show="!showKnow">（{{countdown}}s） 我已知晓</div>
-        <!-- <div class="goon" @click="showEnvelope = false">随便看看</div> -->
+        <div class="goon" @click="showEnvelope = false">随便看看</div>
         <div class="btn" @click="openEnvelop">
           <img :src="require('./assets/seal-word.png')">
         </div>
         <div class="left flower"></div>
         <div class="right flower"></div>
+        
+      </div>
+      <div class="count-down" v-if="openedEnvelope">
+        <div class="clear-time-know" v-show="showKnow">我已知晓</div>
+        <div class="clear-time-no" v-show="!showKnow">（{{countdown}}s） 我已知晓</div>
       </div>
     </div>
   </div>
@@ -51,7 +54,7 @@ export default {
     return {
       openedEnvelope: false,
       showEnvelope: true,
-      countdown:4,
+      countdown:3,
       showKnow:false,
     }
   },
@@ -70,7 +73,7 @@ export default {
             this.showKnow = true
             console.log(this.showKnow)
           }else{
-            this.loading();
+              this.loading();
           }
       },1000);
     },
@@ -86,20 +89,9 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@media screen and(min-width:400px) and (max-width:900px) {
-  html{
-    background-color: red;
-  }
-  .shadow{
-    background-color: red;
-    .envelop{
-      transform: scale(0.1);
-    }
-  }
-}
+
+<style lang="scss">
 .text-indent{
-  font-size: 14px;
   text-indent: 2em;
 }
 .text-indent1{
@@ -176,6 +168,7 @@ html, body{
     transform: rotate(180deg)
   }
 }
+
 .shadow{
   position: fixed;
   left: 0px;
@@ -188,7 +181,7 @@ html, body{
     width: 864px;
     height: 406px;
     /* background: #212865 url('./assets/envelop-back.png') no-repeat; */
-    background: #212865 url('./assets/envelop-back.png') no-repeat;
+    background: #212865 url('http://img-ys011.didistatic.com/static/dc2img/envelop-back.png') no-repeat;
     background-size: 864px 406px;
     position: absolute;
     border-radius: 4px;
@@ -197,7 +190,7 @@ html, body{
     margin-left: -432px;
     margin-top: -300px;
     z-index: 5001;
-    transform: scale(0.8);
+    
     .front{
       position: absolute;
       top: 0px;
@@ -205,7 +198,7 @@ html, body{
       width: 864px;
       height: 406px;
       /* background: url('./assets/envelop-front.png') no-repeat; */
-      background: url('./assets/envelop-front.png') no-repeat;
+      background: url('http://img-ys011.didistatic.com/static/dc2img/envelop-front.png') no-repeat;
       background-size: 864px 406px;
       z-index: 5003;
       border-radius: 0px 0px 4px 4px;
@@ -241,7 +234,7 @@ html, body{
       width: 864px;
       height: 293px;
       /* background: url('./assets/envelop-top.png') no-repeat; */
-      background: url('./assets/envelop-top.png') no-repeat;
+      background: url('http://img-ys011.didistatic.com/static/dc2img/envelop-top.png') no-repeat;
       background-size: 864px 293px;
       z-index: 5005;
       display: flex;
@@ -262,7 +255,7 @@ html, body{
       width: 864px;
       height: 249px;
       /* background: url('./assets/envelop-bottom.png') no-repeat; */
-      background: url('./assets/envelop-bottom.png') no-repeat;
+      background: url('http://img-ys011.didistatic.com/static/dc2img/envelop-bottom.png') no-repeat;
       background-size: 864px 249px;
       z-index: 5004;
       display: flex;
@@ -293,14 +286,7 @@ html, body{
         line-height: 20px;
         height: 30px;
         z-index: 5007;
-    }
-    .goon-look{
-      background-color: #7f7f7d;
-        border: 1px solid #7f7f7d;
-    }
-    .goon-click{
-      cursor:pointer;
-    }
+      }
     .btn{
       position: absolute;
       top: 200px;
@@ -385,7 +371,7 @@ html, body{
         transition: all 0.5s ease 1.3s;
       }
       .paper{
-        top: -165px;
+        top: -215px;
         height: 492px;
         transition: top 0.5s ease 2s, height 0.5s ease 2s;
         visibility: visible;
@@ -425,23 +411,24 @@ html, body{
       width: 380px;
       p {
         font-family: PingFangSC-Regular;
-        font-size: 14px;
+        font-size: 12px;
         color: #303A51;
         text-align: justify;
-        line-height: 24px;
+        line-height: 20px;
         &.title {
           font-family: PingFangSC-Semibold;
-          font-size: 16px;
+          font-size: 14px;
           color: #101724;
-          line-height: 24px;
+          line-height: 22px;
         }
         &.desc {
           width: 260px;
         }
         &.time {
+          margin: 12px 0;
           span {
             font-family: DINAlternate-Bold;
-            /* font-size: 12px; */
+            font-size: 12px;
           }
         }
         &.thank {
@@ -471,7 +458,6 @@ html, body{
         }
         .hot {
           color: #ef645c;
-          font-weight: 700;
         }
       }
       .tip {
